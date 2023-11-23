@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    tools {
+        maven 'M1'
+    }
+
+    stages {
+        stage('Fetching') {
+            steps {
+                git branch:'main', url:'https://github.com/RishantShukla/SpringPetclinic.git'
+            }
+        }
+        stage('Compile') {
+            steps {
+                bat 'mvn compile'
+            }
+        }
+        stage('Test') {
+            steps {
+                bat 'mvn test'
+            }
+        }
+        stage('Package') {
+            steps {
+                bat 'mvn package'
+            }
+        }
+        stage('Verify') {
+            steps {
+                bat 'mvn verify'
+            }
+        }
+        stage('Install') {
+            steps {
+                bat 'mvn install'
+            }
+        }
+        
+    }
+}
